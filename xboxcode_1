@@ -1,0 +1,33 @@
+import pygame
+import serial
+import time
+
+# Initialize pygame and joystick
+pygame.init()
+pygame.joystick.init()
+joystick = pygame.joystick.Joystick(0)
+joystick.init()
+
+# Set up serial connection to Arduino (change COM port as needed)
+arduino = serial.Serial('/dev/tty.usbmodem1301', 9600)  # Replace 'COM3' with your Arduino port
+time.sleep(2)
+
+def map_range(value, in_min, in_max, out_min, out_max):
+    return int((value - in_min) * (out_max - out_min) / (in_max - in_min) + out_min)
+
+while True:
+    pygame.event.pump()
+
+    # Get Y-axis values of left and right joysticks
+    left_y = -joystick.get_axis(1)  # Left stick Y
+    right_y = -joystick.get_axis(4) # Right stick Y
+
+    # Map from -1 to 1 --> 0 to 180
+    angle1 = map_range(left_y, -1, 1, 0, 180)
+    angle2 = map_range(right_y, -1, 1, 0, 180)
+
+    # Send to Arduino as "angle1,angle2\n"
+    data = f"{angle1},{angle2}\n"
+    arduino.write(data.encode('utf-8'))
+
+    time.sleep(0.05)
