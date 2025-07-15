@@ -1,0 +1,50 @@
+#include <Servo.h>
+
+Servo servo1; // Left joystick
+Servo servo2; // Right joystick
+Servo servo3; // Trackpad
+
+int angle1 = 90;
+int angle2 = 90;
+int angle3 = 90;
+
+void setup() {
+  servo1.attach(9);
+  servo2.attach(10);
+  servo3.attach(11);
+  Serial.begin(9600);
+
+  servo1.write(angle1);
+  servo2.write(angle2);
+  servo3.write(angle3);
+}
+
+void loop() {
+  if (Serial.available()) {
+    String input = Serial.readStringUntil('\n');
+
+    int firstComma = input.indexOf(',');
+    int secondComma = input.indexOf(',', firstComma + 1);
+
+    if (firstComma > 0 && secondComma > firstComma) {
+      int newAngle1 = input.substring(0, firstComma).toInt();
+      int newAngle2 = input.substring(firstComma + 1, secondComma).toInt();
+      int newAngle3 = input.substring(secondComma + 1).toInt();
+
+      if (newAngle1 != angle1) {
+        angle1 = newAngle1;
+        servo1.write(angle1);
+      }
+
+      if (newAngle2 != angle2) {
+        angle2 = newAngle2;
+        servo2.write(angle2);
+      }
+
+      if (newAngle3 != angle3) {
+        angle3 = newAngle3;
+        servo3.write(angle3);
+      }
+    }
+  }
+}
