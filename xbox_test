@@ -1,0 +1,15 @@
+import pygame
+pygame.init()
+pygame.joystick.init()
+
+joystick = pygame.joystick.Joystick(0)
+joystick.init()
+
+while True:
+    pygame.event.pump()  # Updates controller input
+
+    for i in range(joystick.get_numaxes()):
+        print(f"Axis {i}: {joystick.get_axis(i):.2f}")
+    
+    print("----------")
+    pygame.time.wait(500)
