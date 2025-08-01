@@ -1,0 +1,164 @@
+#include <Servo.h>
+
+//initializing servos
+Servo servo1;
+Servo servo2;
+Servo servo3;
+Servo servo4;
+Servo servo5;
+Servo servo6;
+
+//initializing buttonpins
+const int button1Pin = 13;
+const int button2Pin = 12;
+const int button3Pin = 11;
+const int button4Pin = 10;
+const int button5Pin = 9;
+const int button6Pin = 8;
+
+
+//initializing servo pins
+const int servo1Pin = 7;
+const int servo2Pin = 6;
+const int servo3Pin = 5;
+const int servo4Pin = 4;
+const int servo5Pin = 3;
+const int servo6Pin = 2;
+
+//initializing starting angles for servos
+int angle1 = 0;
+int angle2 = 0;
+int angle3 = 0;
+int angle4 = 0;
+int angle5 = 0;
+int angle6 = 0;
+
+
+void setup() {
+  servo1.attach(servo1Pin);
+  servo2.attach(servo2Pin);
+  servo3.attach(servo3Pin);
+  servo4.attach(servo4Pin);
+  servo5.attach(servo5Pin);
+  servo6.attach(servo6Pin);
+
+  pinMode(button1Pin, INPUT);  // Use INPUT_PULLUP if no external resistor
+  pinMode(button2Pin, INPUT);
+  pinMode(button3Pin, INPUT);
+  pinMode(button4Pin, INPUT);
+  pinMode(button5Pin, INPUT);
+  pinMode(button6Pin, INPUT);
+
+  servo1.write(angle1);
+  servo2.write(angle2);
+  servo3.write(angle3);
+  servo4.write(angle4);
+  servo5.write(angle5);
+  servo6.write(angle6);
+}
+
+void loop() {
+  // servo 1 code
+  if (digitalRead(button1Pin) == HIGH) {
+    if (angle1 < 180) {
+      angle1 += 1;
+      servo1.write(angle1);
+      delay(10);  // controls speed of increment
+    }
+  }
+    if (angle1 == 180) {
+        while(digitalRead(button1Pin) == HIGH){
+          angle1 -= 1;
+          servo1.write(angle1);
+          delay(10);  // controls speed of increment
+        }
+    }
+
+
+
+// servo 2 code
+  if (digitalRead(button2Pin) == HIGH) {
+    if (angle2 < 180) {
+      angle2 += 1;
+      servo2.write(angle2);
+      delay(10);  // controls speed of increment
+    }
+  }
+    if (angle2 == 180) {
+        while(digitalRead(button2Pin) == HIGH){
+          angle2 -= 1;
+          servo2.write(angle2);
+          delay(10);  // controls speed of increment
+        }
+    }
+
+// servo 3 code
+  if (digitalRead(button3Pin) == HIGH) {
+    if (angle3 < 180) {
+      angle3 += 1;
+      servo3.write(angle3);
+      delay(10);  // controls speed of increment
+    }
+  }
+    if (angle3 == 180) {
+        while(digitalRead(button3Pin) == HIGH){
+          angle3 -= 1;
+          servo3.write(angle3);
+          delay(10);  // controls speed of increment
+        }
+    }
+
+//servo4
+  if (digitalRead(button4Pin) == HIGH) {
+    if (angle4 < 180) {
+      angle4 += 1;
+      servo4.write(angle4);
+      delay(10);  // controls speed of increment
+    }
+  }
+    if (angle4 == 180) {
+        while(digitalRead(button4Pin) == HIGH){
+          angle4 -= 1;
+          servo4.write(angle4);
+          delay(10);  // controls speed of increment
+        }
+    }
+
+
+//servo5 code
+  if (digitalRead(button5Pin) == HIGH) {
+    if (angle5 < 180) {
+      angle5 += 1;
+      servo5.write(angle5);
+      delay(10);  // controls speed of increment
+    }
+  }
+    if (angle5 == 180) {
+        while(digitalRead(button5Pin) == HIGH){
+          angle5 -= 1;
+          servo5.write(angle5);
+          delay(10);  // controls speed of increment
+        }
+    }
+
+
+//servo6 code
+  if (digitalRead(button6Pin) == HIGH) {
+    if (angle6 < 180) {
+      angle6 += 1;
+      servo6.write(angle6);
+      delay(10);  // controls speed of increment
+    }
+  }
+    if (angle6 == 180) {
+        while(digitalRead(button6Pin) == HIGH){
+          angle6 -= 1;
+          servo6.write(angle6);
+          delay(10);  // controls speed of increment
+        }
+    }
+
+
+
+
+}
